@@ -130,15 +130,24 @@ router.post(
 
     // Social
     profileFields.social = {};
-    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+    ["youtube", "twitter", "facebook", "linkedin", "instagram"].forEach(
+      item => {
+        if (req.body[item]) {
+          profileFields.social[item] = req.body[item].match(/^http[s]*:\/\/.*/)
+            ? req.body[item]
+            : `https://${req.body[item]}`;
+        }
+      }
+    );
+    /* if (req.body.youtube)
+      profileFields.social.youtube = req.body.youtube.match(/^http[s]*:\/\//)
+        ? req.body.youtube
+        : `//${req.body.youtube}`;
     if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.handle) profileFields.handle = req.body.handle;
+*/
 
     Profile.findOne({ user: req.user.id })
       .then(profile => {

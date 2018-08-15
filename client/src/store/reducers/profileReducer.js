@@ -22,6 +22,12 @@ const clearCurrentProfile = (state, action) => ({
   profile: null
 });
 
+const getProfiles = (state, action) => ({
+  ...state,
+  profiles: action.payload,
+  loading: false
+});
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.PROFILE_LOADING:
@@ -30,6 +36,8 @@ export default (state = initialState, action) => {
       return getProfile(state, action);
     case actionTypes.CLEAR_CURRENT_PROFILE:
       return clearCurrentProfile(state, action);
+    case actionTypes.GET_PROFILES:
+      return getProfiles(state, action);
     default:
       return state;
   }

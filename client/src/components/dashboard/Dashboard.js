@@ -5,6 +5,8 @@ import * as profileActions from "../../store/actions/profileActions";
 import Spinner from "../common/spinner";
 import { Link } from "react-router-dom";
 import ProfileActions from "./ProfileActions";
+import Experience from "./Experience";
+import Education from "./Education";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -32,7 +34,8 @@ class Dashboard extends Component {
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
-            {/* TODO: exp and edu*/}
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
             <div style={{ margin: "60px auto" }}>
               <button
                 type="button"
